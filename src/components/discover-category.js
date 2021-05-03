@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+
 import { getParsedResponse } from '../services/parser'
-import { CardList } from '../components/card-list'
-import { Alert } from './alert'
+
+import { CardList, Alert } from '../components'
 
 import { SaveAlt } from '@material-ui/icons';
 import CloseIcon from '@material-ui/icons/Close';

@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { getParsedResponse } from '../services/parser'
-import { CardList } from '../components/card-list'
-import { Loading } from '../components/loading'
-import { Alert } from '../components/alert'
+
+import { CardList, Loading, Alert } from '../components'
+
 
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 import { SaveAlt } from '@material-ui/icons';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-export const SearchFeed = () => {
+export default function SearchFeed() {
 
     const [urlValue, setUrlValue] = useState("")
     const [nameValue, setNameValue] = useState("")

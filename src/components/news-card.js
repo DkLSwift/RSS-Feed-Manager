@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import arrowRight from '../assets/arrow-point-to-right.svg'
 
-export const NewsCard = ({ item }) => {
+const NewsCard = ({ item }) => {
 
 
     const canDisplayImage = (imgUrl) => {
@@ -34,6 +33,7 @@ export const NewsCard = ({ item }) => {
     )
 }
 
+export default NewsCard
 
 const Card = styled.div`
     background-color:  ${props => props.theme.secondaryAlt};

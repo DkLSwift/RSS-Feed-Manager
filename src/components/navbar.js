@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import * as ROUTES from '../constants/routes'
 
 import { dephtsOfWater, blueberry, darkOrangeColors } from '../components/Theme'
-// import SettingsIcon from '@material-ui/icons/Settings';
+
 import PaletteIcon from '@material-ui/icons/Palette';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import CloseIcon from '@material-ui/icons/Close';

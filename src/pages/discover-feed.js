@@ -3,10 +3,9 @@ import styled from 'styled-components'
 
 import { discoverRSS } from '../constants/default-rss'
 
-import DiscoverCategory from '../components/discover-category'
-import SearchBar from '../components/searchbar'
+import { SearchBar, DiscoverCategory } from '../components'
 
-export const DiscoverFeed = () => {
+export default function DiscoverFeed() {
 
     const feedStr = 'rss-feed-manager'
     const [currentFeeds, setCurrentFeeds] = useState(JSON.parse(localStorage.getItem(feedStr)))

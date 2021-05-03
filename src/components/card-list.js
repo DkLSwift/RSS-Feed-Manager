@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
-import { NewsCard } from './news-card'
+
+import { NewsCard } from '../components'
 
 
 
-export  const CardList = ({ 
+const CardList = ({ 
         news, 
         displayTrailingButton, 
         trailingButtonText, 
@@ -84,6 +85,8 @@ export  const CardList = ({
         </CardListContainer>
     )
 }
+
+export default CardList
 
 const CardListContainer = styled.div`
     width: 94%;

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import * as ROUTES from '../constants/routes'
+import useComponentVisible from '../hooks/use-component-visible'
 
 import { dephtsOfWater, blueberry, darkOrangeColors } from '../components/Theme'
 
@@ -14,27 +15,9 @@ const Navbar = ({ setTheme, themeColors }) => {
 
     const [toggleSettings, setToggleSettings] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
-    const themeDiv = useRef(null)
-    const menu = useRef(null)
-    useOutsideAlerter(themeDiv)
-    useOutsideAlerter(menu)
-
-    function useOutsideAlerter(ref) {
-        useEffect(() => {
-            function handleClickOutside(event) {
-                if (ref.current && !ref.current.contains(event.target)) {
-                    setToggleSettings(false)
-                    setShowMenu(false)
-                }
-            }
-            // Bind the event listener
-            document.addEventListener("mousedown", handleClickOutside);
-            return () => {
-                // Unbind the event listener on clean up
-                document.removeEventListener("mousedown", handleClickOutside);
-            };
-        }, [ref])
-    }
+    
+    const themeContainer = useComponentVisible(false)
+    const menu = useComponentVisible(false)
 
     const handleChangeOfTheme = (selectedTheme) => {
         
@@ -53,10 +36,15 @@ const Navbar = ({ setTheme, themeColors }) => {
                 setTheme(darkOrangeColors)
                 break;
         }
-        setToggleSettings(false)
+        themeContainer.setIsComponentVisible(false)
     }
 
+    const resetPage = () => {
+        menu.setIsComponentVisible(false)
+        window.scrollTo(0,0)
+    }
 
+    console.log('dam theme container is visible : ' , themeContainer.isComponentVisible);
     return (
         
          <Nav>
@@ -72,53 +60,46 @@ const Navbar = ({ setTheme, themeColors }) => {
                         Discover
                     </StyledLink>
                     <ThemeWrapper>
-                        <ThemeSettingsButton onClick={() => {
-                            if (!toggleSettings) setToggleSettings(true)
-                        }} >
+                        <ThemeSettingsButton 
+                            // onMouseDown={() => themeContainer.setIsComponentVisible(themeContainer.isComponentVisible ? false : true)} 
+                            onClick={() => themeContainer.setIsComponentVisible(() => themeContainer.isComponentVisible ? false : true)} 
+                        >
                             <PaletteIcon />
                         </ThemeSettingsButton>
-                        { toggleSettings && 
-                            <ThemeContainer ref={themeDiv}>
-                                <h3>Choose Theme</h3>
-                                <Button onClick={() => handleChangeOfTheme(themeColors.darkOrangeColors)}>Dark Orange</Button>
-                                <Button onClick={() => handleChangeOfTheme(themeColors.dephtsOfWater)}>Dephts Of Water</Button>
-                                <Button onClick={() => handleChangeOfTheme(themeColors.blueberry)}>Blueberry</Button>
-                            </ThemeContainer>
+                        { 
+                            themeContainer.isComponentVisible &&
+                                <ThemeContainer ref={themeContainer.ref}>
+                                    <h3>Choose Theme</h3>
+                                    <Button onClick={() => handleChangeOfTheme(themeColors.darkOrangeColors)}>Dark Orange</Button>
+                                    <Button onClick={() => handleChangeOfTheme(themeColors.dephtsOfWater)}>Dephts Of Water</Button>
+                                    <Button onClick={() => handleChangeOfTheme(themeColors.blueberry)}>Blueberry</Button>
+                                </ThemeContainer>
                         }
                     </ThemeWrapper>
                     
                     
                 </NavList>
-            <MenuButton onClick={() => setShowMenu(true)}>
+            <MenuButton onClick={() => menu.setIsComponentVisible(true)}>
                 <MenuOpenIcon />
             </MenuButton>
             </NavContainer>
-            <Menu showMenu={showMenu} ref={menu}>
+            <Menu showMenu={menu.isComponentVisible} ref={menu.ref}>
                 <MenuHeader>
                     <h2>Menu</h2>
-                    <Button onClick={() => setShowMenu(false)} >
+                    <Button onClick={() => menu.setIsComponentVisible(false)} >
                         <CloseIcon  />
                     </Button>
                 </MenuHeader>
                 <MenuHeaderUnderline />
                 <MenuList>
                     <h4>Pages</h4>
-                    <StyledLink  to={ROUTES.HOME} onClick={() => {
-                            setShowMenu(false)
-                            window.scrollTo(0,0)
-                        }}>
+                    <StyledLink  to={ROUTES.HOME} onClick={() => resetPage()}>
                         Home
                     </StyledLink>
-                    <StyledLink  to={ROUTES.SEARCH_FEEDS} onClick={() => {
-                            setShowMenu(false)
-                            window.scrollTo(0,0)
-                        }}>
+                    <StyledLink  to={ROUTES.SEARCH_FEEDS} onClick={() => resetPage()}>
                         Search
                     </StyledLink>
-                    <StyledLink to={ROUTES.DISCOVER_FEEDS} onClick={() =>{ 
-                            setShowMenu(false)
-                            window.scrollTo(0,0)
-                        }} >
+                    <StyledLink to={ROUTES.DISCOVER_FEEDS} onClick={() => resetPage()} >
                         Discover
                     </StyledLink>
                 </MenuList>

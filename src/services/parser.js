@@ -16,7 +16,7 @@ export const getParsedResponse = async (source, baseUrl) => {
 
         xhttp.onreadystatechange = async function() {
             if (this.readyState === 4 && this.status === 200) {
-                console.log('xhttp.responseXML: ',xhttp.responseXML);
+                // console.log('xhttp.responseXML: ',xhttp.responseXML);
                
                 if (xhttp.responseXML !== null && xhttp.responseXML !== undefined ) {
                 
@@ -66,8 +66,6 @@ export const getParsedResponse = async (source, baseUrl) => {
                 const feed = response.querySelectorAll('item').length > 0 ? 
                     response.querySelectorAll('item') 
                     : response.querySelectorAll('entry')
-                console.log("response: ", res);
-                console.log("feed: ", feed);
                 var news = [];
                 feed.forEach((item) => {
 

@@ -22,8 +22,11 @@ export default function DiscoverFeed() {
         }
     }, [discoverFeeds, currentFeeds])
 
+    // Compare static Discover RSS Feeds from _constants__default-rss file 
+    //          to the user saved local storage RSS Feeds
     const filterFeeds = () => {
         const filteredFeeds = discoverFeeds.map((item) => item.data.filter((itemData) => !currentFeeds.some(feed => feed.url === itemData.url)))
+        //  then set the filtered array to display
         setDiscoverFilteredFeeds(filteredFeeds)
     }
 
@@ -31,16 +34,21 @@ export default function DiscoverFeed() {
     const handleSearch = (str) => {
         if (discoverFeeds !== undefined){
             if (str.length >= 3) {
+                // Filter categories based on search input
                 const categories = discoverFeeds.filter(feed => feed.category.toLowerCase().includes(str.toLowerCase()))
                 
                 if ( categories.length > 0 ) {
+                    // if categories found set to display
                     setSearchedCategories(categories)
                 }
+                // Filter each feeds based on search input
                 const feeds = discoverFeeds.map(feed => feed.data.filter(data => data.source.toLowerCase().includes(str.toLowerCase()))).filter(category => category.length > 0)
                 if ( feeds.length > 0 ) {
+                    // if feeds found set to display
                     setSearchedFeeds(feeds)
                 }
             } else {
+                // no search triggered until input characters aren't 3 or over
                 setSearchedCategories([])
                 setSearchedFeeds([])
             }
@@ -65,6 +73,7 @@ export default function DiscoverFeed() {
             { 
                 (searchedCategories.length > 0 || searchedFeeds.length > 0) ?
                     <>
+                    {/* Either one of searched filtered categories or feeds or both are ready to display */}
                         { searchedCategories.map((category, index) => 
                             <DiscoverCategory key={index} category={category.data} currentFeeds={currentFeeds} setCurrentFeeds={setCurrentFeeds} />
                         )}
@@ -73,6 +82,7 @@ export default function DiscoverFeed() {
                             <DiscoverCategory key={index} category={category} currentFeeds={currentFeeds} setCurrentFeeds={setCurrentFeeds} />
                         )}
                     </>  
+                    // Normal display without search or no search results
                     : discoverFilteredFeeds && discoverFilteredFeeds.map((category, index) => 
                         <DiscoverCategory key={index} category={category} currentFeeds={currentFeeds} setCurrentFeeds={setCurrentFeeds} />
                     )

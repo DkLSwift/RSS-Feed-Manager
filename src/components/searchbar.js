@@ -6,6 +6,7 @@ export default function SearchBar({ searchDescription, primaryData, primaryText,
      const [searchStr, setSearchStr] = useState("")
 
     return (
+        // Reusable Title & search component
         <SearchFieldContainer>
                 <h3>{searchDescription}</h3>
                 <TextFieldContainer>
@@ -22,6 +23,7 @@ export default function SearchBar({ searchDescription, primaryData, primaryText,
                         </ClearSearchButton> 
                     }
                 </TextFieldContainer>
+                {/* Display custom reusable text */}
                 <SearchResults>
                     { primaryData.length > 0 && <p>{primaryText}</p> }
                     { secondaryData.length > 0 && <p>{secondaryText}</p> }

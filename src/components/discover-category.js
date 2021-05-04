@@ -30,10 +30,6 @@ export default function DiscoverCategory({ category, currentFeeds, setCurrentFee
                 })
     }
 
-    const handleClosePreview = () => {
-        setPreviewData(null)
-    }
-
     const handleSaveToLocalStorageFeeds = (source, baseUrl) => {
         const newFeeds = [ ...currentFeeds, {source: source, url: baseUrl} ]
         setCurrentFeeds(() => newFeeds)
@@ -65,7 +61,7 @@ export default function DiscoverCategory({ category, currentFeeds, setCurrentFee
                                         displayTrailingButton={true}
                                         trailingButtonText="Close"
                                         trailingButtonIcon={<CloseIcon />}
-                                        handleTrailingButtonOnClick={handleClosePreview}
+                                        handleTrailingButtonOnClick={() => setPreviewData(null)}
                                         displaySecondTrailingButton={true}
                                         secondTrailingButtonText="Save"
                                         secondTrailingButtonIcon={<SaveAlt />}

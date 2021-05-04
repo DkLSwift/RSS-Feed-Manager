@@ -5,8 +5,6 @@ export default function useComponentVisible(initialIsVisible) {
   const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
   const ref = useRef(null);
 
-    console.log('iscomponentvisible: ', isComponentVisible);
-
   const handleHideDropdown = (event) => {
     if (event.key === "Escape") {
       setIsComponentVisible(false);
@@ -21,7 +19,6 @@ export default function useComponentVisible(initialIsVisible) {
 
   useEffect(() => {
     document.addEventListener("keydown", handleHideDropdown, true);
-    // document.addEventListener("click", handleClickOutside, true);
     document.addEventListener("click", handleClickOutside, true);
     return () => {
       document.removeEventListener("keydown", handleHideDropdown, true);

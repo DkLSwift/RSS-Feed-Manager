@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import { NewsCard } from '../components'
 
@@ -93,6 +93,9 @@ const CardListContainer = styled.div`
     max-width: 1800px;
     margin: 2rem auto;
 
+    /* @media screen and (max-width: 350px) {
+        width: 90%;
+    } */
     
 `
 const Header = styled.div`
@@ -107,19 +110,27 @@ const Header = styled.div`
     }
 
      
-        @media screen and (max-width: 700px) {
-            ${props => props.displaySecondTrailingButton && `
-                display: flex;
-                flex-direction: column;
-                
-                h2 {
-                    text-align: center;
-                }
-            `};
-        }
-     
-    
+    @media screen and (max-width: 700px) {
+        ${props => props.displaySecondTrailingButton && `
+            display: flex;
+            flex-direction: column;
+            
+            h2 {
+                text-align: center;
+            }
+        `};
+    }
 
+     @media screen and (max-width: 350px) {
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* h2 {
+            text-align: center;
+        } */
+        
+    }
 `
 const ButtonContainer = styled.div`
 
@@ -145,6 +156,10 @@ const Button = styled.button`
     @media screen and (max-width: 700px) {
         margin-bottom: 44px;
         
+    }
+
+    @media screen and (max-width: 350px) {
+        margin-left: 0;
     }
 `
 

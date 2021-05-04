@@ -44,7 +44,6 @@ const Navbar = ({ setTheme, themeColors }) => {
         window.scrollTo(0,0)
     }
 
-    console.log('dam theme container is visible : ' , themeContainer.isComponentVisible);
     return (
         
          <Nav>

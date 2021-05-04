@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 const Alert = ({ 
@@ -12,21 +12,18 @@ const Alert = ({
 }) => {
 
     
-    const [hasFirstAction, setHasFirstAction] = useState(false)
-    const [hasSecondAction, setHasSecondAction] = useState(false)
-
-    
     useEffect(() => {
+        // if isTemp property is true, alert disappear by itself after 3s
         if (isTemp) setTimeout(() => setDisplayAlert(false), 3000)
-        if (handleFirstAction !== undefined) setHasFirstAction(true) 
-        if (handleSecondAction !== undefined) setHasSecondAction(true) 
     }, [])
+
 
     return (
         <AlertContainer>
             <Text>{text}</Text>
-            { hasSecondAction && <AlertButton onClick={handleSecondAction}>{secondActionText}</AlertButton>}
-            { hasFirstAction && <AlertButton onClick={handleFirstAction}>{firstActionText}</AlertButton>}
+            {/* if one or both actions callbacks are passed, display the buttons */}
+            { handleSecondAction && <AlertButton onClick={handleSecondAction}>{secondActionText}</AlertButton>}
+            { handleFirstAction && <AlertButton onClick={handleFirstAction}>{firstActionText}</AlertButton>}
         </AlertContainer>
     )
 }

@@ -25,6 +25,7 @@ export default function SearchFeed() {
 
 
     const handleUrlValue = (e) => {
+        // Block next steps if no url
         if (e.length <= 5) {
             setNameValue("")
             setCanSearch(false)
@@ -34,6 +35,7 @@ export default function SearchFeed() {
     const handleNameValue = (e) => {
         
         setNameValue(e)
+        // if both url and name are assigned, the search button can be used
         if (nameValue !== "") {
             setCanSearch(true)
         } else {
@@ -46,21 +48,21 @@ export default function SearchFeed() {
         
             setIsLoading(true)
             try {
+                // http request and parse the url into manageable format
                 getParsedResponse(nameValue, urlValue)
                     .then((res) => {
-                        console.log('res: ', res);
                         setFeedPreview(res)
                         setIsLoading(false)
                     })
                     .catch ((error) => {
+                        // problem with http response setup alert with related error message
                         setIsLoading(false)
-                        console.log('error: ', error);
                         setAlertText(error.toString())
                         setDisplayAlert(true)
                     })
             } catch(error) {
-                 setIsLoading(false)
-                console.log('error: ', error);
+                // problem with http response setup alert with related error message
+                setIsLoading(false)
                 setAlertText(error.toString())
                 setDisplayAlert(true)
             }
@@ -68,6 +70,7 @@ export default function SearchFeed() {
     }
 
     const clearSearch = () => {
+        // reset all values to initial state
         setCanSearch(false)
         setIsLoading(false)
         setUrlValue("")
@@ -80,6 +83,7 @@ export default function SearchFeed() {
     }
 
     const handleSaveFeed = () => {
+        // Takes previous used ...feeds then append the selected { feed } to save
         const newFeeds = [ ...feeds, {source: nameValue, url: urlValue} ]
         setFeeds(() => newFeeds)
         localStorage.setItem(feedStr, JSON.stringify(newFeeds))
@@ -99,12 +103,13 @@ export default function SearchFeed() {
                 Grab the RSS Feed url you would like to search and assign a name to save it to your library.<br/>You can get the url by right clicking on the button <RssFeedIcon /> on the news/blog website.
             </Description>
                 <TFContainer>
-                    <TextField value={urlValue} onChange={(e) => handleUrlValue(e.target.value)} placeholder="Add url . / feed rss ...  xml maybe" />
+                    <TextField value={urlValue} onChange={(e) => handleUrlValue(e.target.value)} placeholder="Add url . / feed rss xml" />
                     { urlValue.length > 5 ? 
                         <TextField value={nameValue} onChange={(e) => handleNameValue(e.target.value)}  placeholder="Assign a name for this feed" /> : null 
                     }
                     { canSearch ? <SearchButton onClick={() => handleSearch()} >Search</SearchButton> : null   }           
                 </TFContainer>
+            {/* Display if there is an error or sucessfull saved feed alert */}
             { displayAlert && 
                 <Alert 
                     text={alertText}
@@ -115,6 +120,7 @@ export default function SearchFeed() {
                 />
             }
             { 
+            // feed from url successfully parsed and displayed
                 feedPreview ? 
                     <CardList 
                         news={feedPreview.news}

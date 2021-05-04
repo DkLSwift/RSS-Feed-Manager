@@ -26,8 +26,9 @@ export default function Home() {
 
 
     const getNewsfromUrls = async (feeds) => {
+        // Creates an array of promises
         const resolvedPromisesArray = feeds.map(feed => getParsedResponse(feed.source, feed.url).catch(err => console.log('Promise err: ', err)))
-
+        // Wait for all promises to resolve or reject before setting and displaying the data 
         await Promise.all(resolvedPromisesArray)
             .then(value => setAllNews(value))
             .catch(err => console.log('Promise ALL err: ', err))
@@ -45,13 +46,16 @@ export default function Home() {
 
     const handleSearch = (str) => {
         if (str.length >= 3) {
+            // Filter sources based on search input
             const sources = allNews.filter(feed => feed.source.toLowerCase().includes(str.toLowerCase()))
             if ( sources.length > 0 ) {
-                
+                // if categories found set to display
                 setSearchedSources(sources)
             }
+            // Filter specific news related to the input search
             const news = allNews.flatMap(feed => feed.news.filter(news => news.title.toLowerCase().includes(str.toLowerCase())))
             if ( news.length > 0 ) {
+                // Then display into a grid if founds
                 setSearchedNews(news)
             }
         } else {
@@ -83,6 +87,7 @@ export default function Home() {
                     />
                    { (searchedSources.length > 0 || searchedNews.length > 0) ?
                         <>
+                        {/* Either one of searched filtered categories or feeds or both are ready to display */}
                             { searchedSources.map((value, index) => 
                                 value && 
                                     <CardList 
@@ -95,11 +100,13 @@ export default function Home() {
                                     />
                             )}
                             {
+                                // Grid display of searched news results
                                 (searchedNews.length > 0) ?
                                     <SearchCollectionCard news={searchedNews} />
                                     : null
                             }
                         </>
+                        // Normal display of user saved feed
                         : allNews.map((value, index) => 
                             value && 
                                 <CardList 

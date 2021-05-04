@@ -23,7 +23,7 @@ const CardList = ({
     const [startX, setstartX] = useState()
     const [scrollLeft, setscrollLeft] = useState()
    
-
+    // Mouse Events: Drag and slide cards collection logic
     const handleMouseDown = (e) => {
         setisDown(() => true)
         slider.current.classList.add('active')

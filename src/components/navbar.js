@@ -13,15 +13,11 @@ import CloseIcon from '@material-ui/icons/Close';
 const Navbar = ({ setTheme, themeColors }) => {
 
 
-    const [toggleSettings, setToggleSettings] = useState(false)
-    const [showMenu, setShowMenu] = useState(false)
-    
     const themeContainer = useComponentVisible(false)
     const menu = useComponentVisible(false)
 
     const handleChangeOfTheme = (selectedTheme) => {
         
-        console.log(selectedTheme);
         switch (selectedTheme) {
             case 'darkOrangeColors':
                 setTheme(darkOrangeColors)
@@ -51,6 +47,7 @@ const Navbar = ({ setTheme, themeColors }) => {
                 <Logo href={ROUTES.HOME}>
                     App Name
                 </Logo>
+                {/* Desktop navigation */}
                 <NavList>
                     <StyledLink  to={ROUTES.SEARCH_FEEDS}>
                         Search
@@ -58,9 +55,9 @@ const Navbar = ({ setTheme, themeColors }) => {
                     <StyledLink to={ROUTES.DISCOVER_FEEDS}>
                         Discover
                     </StyledLink>
+                    {/* Desktop theme display */}
                     <ThemeWrapper>
                         <ThemeSettingsButton 
-                            // onMouseDown={() => themeContainer.setIsComponentVisible(themeContainer.isComponentVisible ? false : true)} 
                             onClick={() => themeContainer.setIsComponentVisible(() => themeContainer.isComponentVisible ? false : true)} 
                         >
                             <PaletteIcon />
@@ -75,13 +72,15 @@ const Navbar = ({ setTheme, themeColors }) => {
                                 </ThemeContainer>
                         }
                     </ThemeWrapper>
-                    
-                    
+                    {/* End Desktop theme display */}
                 </NavList>
-            <MenuButton onClick={() => menu.setIsComponentVisible(true)}>
-                <MenuOpenIcon />
-            </MenuButton>
+                {/* End Desktop navigation */}
+                {/* Mobile hamburger button */}
+                <MenuButton onClick={() => menu.setIsComponentVisible(true)}>
+                    <MenuOpenIcon />
+                </MenuButton>
             </NavContainer>
+            {/* Mobile Drawer menu */}
             <Menu showMenu={menu.isComponentVisible} ref={menu.ref}>
                 <MenuHeader>
                     <h2>Menu</h2>
@@ -108,8 +107,8 @@ const Navbar = ({ setTheme, themeColors }) => {
                     <Button onClick={() => handleChangeOfTheme(themeColors.dephtsOfWater)}>Dephts Of Water</Button>
                     <Button onClick={() => handleChangeOfTheme(themeColors.blueberry)}>Blueberry</Button>
                 </MenuTheme>
-                
             </Menu>
+            {/* End Mobile Drawer menu */}
         </Nav>
     );
 }

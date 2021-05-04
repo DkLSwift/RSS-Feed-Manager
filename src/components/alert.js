@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-
-export const Alert = ({ 
+const Alert = ({ 
     text, 
     isTemp,
     firstActionText,
@@ -31,6 +30,8 @@ export const Alert = ({
         </AlertContainer>
     )
 }
+
+export default Alert
 
 
 const AlertContainer = styled.div`

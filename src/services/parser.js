@@ -1,4 +1,4 @@
-import {News} from '../models/news'
+import { News } from '../models/news'
 
 export const getParsedResponse = async (source, baseUrl) => {
 
@@ -11,19 +11,16 @@ export const getParsedResponse = async (source, baseUrl) => {
 
         var xhttp = new XMLHttpRequest();
         
-        
         xhttp.open("GET", builtUrl, true);
         xhttp.send();
 
         xhttp.onreadystatechange = async function() {
-            // console.log("xhttp response : ", this.response);
             if (this.readyState === 4 && this.status === 200) {
                 console.log('xhttp.responseXML: ',xhttp.responseXML);
                
                 if (xhttp.responseXML !== null && xhttp.responseXML !== undefined ) {
                 
                     const result = parseResponse(xhttp.responseXML)
-                        // console.log('Resolve promise with: ', result)
                         if (result.news.length > 0) {
                             resolve(result)
                         } else {
@@ -33,7 +30,6 @@ export const getParsedResponse = async (source, baseUrl) => {
                      
                     if (isHTML(xhttp.response)) {
                         const doc = new DOMParser().parseFromString(xhttp.response, "text/html");
-                        // console.log('doc: ',doc);
                         const result = parseResponse(doc)
 
                         if (result.news.length > 0) {
@@ -46,7 +42,6 @@ export const getParsedResponse = async (source, baseUrl) => {
                     }
                 } else {
                     reject(new Error(`Xhttp reponse XML doesn't exist for source ${source}`))
-                    // throw new Error(`Xhttp reponse XML doesn't exist for source ${source}`)
                 }
             } else if (this.readyState !== 2 && this.readyState !== 3){
                 reject(new Error(`Status Error # ${this.status} readystate ${this.readyState}`))
@@ -95,14 +90,12 @@ export const getParsedResponse = async (source, baseUrl) => {
                                 break;
                             case "description":
                                 if (isHTML(text)) {
-                                    
                                     let result = convertStringToHTMLElements(text)
                                     description = result.description
                                     if (result.image !== undefined)  imgUrl = result.image
                                 } else {
                                     description = text !== "" ? 
                                         text : htmlCollection[i].innerHTML.replace("<!--[CDATA[", "").replace("]]-->", "");
-                                   
                                 }
                                 break;
                             case "content":
@@ -146,30 +139,3 @@ export const getParsedResponse = async (source, baseUrl) => {
     }) 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-                // const nodes = item.childNodes
-
-                // const title = item.querySelector('title').textContent
-                // const link = item.querySelector('link').textContent
-                // const pubDate = item.querySelector('pubDate').textContent
-                // const description = item.querySelector('description').textContent
-            
-                // const link = children.item(1).textContent
-                // const pubDate = children.item(2).textContent
-                // const author = children['author']
-                // const description = children.item(4).textContent
-                // const mediaThumbnail = children.item(5).getAttributeNode('url')
-                // const mediaGroup = children.item(6).getAttributeNode('url')
-                // console.log(title);
-                
-                // console.log('author: ', author);

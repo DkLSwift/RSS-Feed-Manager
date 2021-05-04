@@ -3,10 +3,9 @@ import styled from 'styled-components'
 
 import { discoverRSS } from '../constants/default-rss'
 
-import DiscoverCategory from '../components/discover-category'
-import SearchBar from '../components/searchbar'
+import { SearchBar, DiscoverCategory } from '../components'
 
-export const DiscoverFeed = () => {
+export default function DiscoverFeed() {
 
     const feedStr = 'rss-feed-manager'
     const [currentFeeds, setCurrentFeeds] = useState(JSON.parse(localStorage.getItem(feedStr)))
@@ -23,10 +22,7 @@ export const DiscoverFeed = () => {
         }
     }, [discoverFeeds, currentFeeds])
 
-    
-
     const filterFeeds = () => {
-        // const filteredFeeds = discoverFeeds.map((item) => item.data.filter((value) => currentFeeds.filter(currentFeed => currentFeed.url !== value.url)))
         const filteredFeeds = discoverFeeds.map((item) => item.data.filter((itemData) => !currentFeeds.some(feed => feed.url === itemData.url)))
         setDiscoverFilteredFeeds(filteredFeeds)
     }
@@ -54,35 +50,33 @@ export const DiscoverFeed = () => {
 
     return (
         <Page>
-            {/* <Container> */}
-                <Description>
-                    Search an interresting RSS feed through a small made up list
-                </Description>
-                <SearchBar 
-                    searchDescription="Search for categories or specifics RSS Feeds"
-                    handleSearch={handleSearch} 
-                    placeholder="Search for categories or feeds ..."
-                    primaryData={searchedCategories}
-                    primaryText={`Results: ${searchedCategories.length} ${searchedCategories.length > 1 ? 'categories' : 'category'} found`}
-                    secondaryData={searchedFeeds} 
-                    secondaryText={`Results: ${searchedFeeds.length} ${searchedFeeds.length > 1 ? 'feeds' : 'feed'} found`}
-                />
-                { 
-                    (searchedCategories.length > 0 || searchedFeeds.length > 0) ?
-                        <>
-                            { searchedCategories.map((category, index) => 
-                                <DiscoverCategory key={index} category={category.data} currentFeeds={currentFeeds} setCurrentFeeds={setCurrentFeeds} />
-                            )}
-                            {
-                                searchedFeeds.map((category, index) => 
-                                <DiscoverCategory key={index} category={category} currentFeeds={currentFeeds} setCurrentFeeds={setCurrentFeeds} />
-                            )}
-                        </>  
-                        : discoverFilteredFeeds && discoverFilteredFeeds.map((category, index) => 
+            <Description>
+                Search an interresting RSS feed through a small made up list
+            </Description>
+            <SearchBar 
+                searchDescription="Search for categories or specifics RSS Feeds"
+                handleSearch={handleSearch} 
+                placeholder="Search for categories or feeds ..."
+                primaryData={searchedCategories}
+                primaryText={`Results: ${searchedCategories.length} ${searchedCategories.length > 1 ? 'categories' : 'category'} found`}
+                secondaryData={searchedFeeds} 
+                secondaryText={`Results: ${searchedFeeds.length} ${searchedFeeds.length > 1 ? 'feeds' : 'feed'} found`}
+            />
+            { 
+                (searchedCategories.length > 0 || searchedFeeds.length > 0) ?
+                    <>
+                        { searchedCategories.map((category, index) => 
+                            <DiscoverCategory key={index} category={category.data} currentFeeds={currentFeeds} setCurrentFeeds={setCurrentFeeds} />
+                        )}
+                        {
+                            searchedFeeds.map((category, index) => 
                             <DiscoverCategory key={index} category={category} currentFeeds={currentFeeds} setCurrentFeeds={setCurrentFeeds} />
-                        )
-                }
-            {/* </Container> */}
+                        )}
+                    </>  
+                    : discoverFilteredFeeds && discoverFilteredFeeds.map((category, index) => 
+                        <DiscoverCategory key={index} category={category} currentFeeds={currentFeeds} setCurrentFeeds={setCurrentFeeds} />
+                    )
+            }
         </Page>
     )
 }
@@ -94,12 +88,6 @@ const Page = styled.div`
     text-align: center;
 `
 
-// const Container = styled.div`
-//     margin: 10rem auto;
-//     text-align: center;
-//     color: white;
-    
-// `
 const Description = styled.h2`
 
     font-size: 2.8rem;

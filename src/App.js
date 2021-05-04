@@ -3,18 +3,13 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import * as ROUTES from './constants/routes'
 
-import Navbar from './components/navbar'
-import Footer from './components/footer'
+import { Navbar, Footer, ToTopButton } from './components'
 
 import { defaultRSS } from './constants/default-rss'
-import { Home } from './pages/home';
-import { SearchFeed } from './pages/search-feed';
-import { DiscoverFeed } from './pages/discover-feed';
-import { NotFound } from './pages/not-found'
+import { Home, SearchFeed, DiscoverFeed, NotFound } from './pages'
 
-import { dephtsOfWater, blueberry, darkOrangeColors } from './components/Theme'
+import { darkOrangeColors } from './components/Theme'
 import { ThemeProvider } from "styled-components";
-import ToTopButton from './components/to-top-button';
 
 const ThemeColors = {
   darkOrangeColors: 'darkOrangeColors',
@@ -36,7 +31,6 @@ function App() {
     localStorage.setItem(feedStr, JSON.stringify(defaultRSS))
   } 
   
-
   useEffect(() => {
     if (theme === null) {
       localStorage.setItem(themeStr, JSON.stringify(darkOrangeColors))
@@ -69,7 +63,6 @@ function App() {
       <Footer />
       </BrowserRouter>
     </ThemeProvider>
-    
   );
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-export const Loading = () => {
+const Loading = () => {
     return (
         <Container>
             <Text>LOADING ...</Text>
@@ -10,6 +10,7 @@ export const Loading = () => {
     )
 }
 
+export default Loading
 
 const Container = styled.div`
     height: 90vh;

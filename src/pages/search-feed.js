@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { getParsedResponse } from '../services/parser'
-import { CardList } from '../components/card-list'
-import { Loading } from '../components/loading'
-import { Alert } from '../components/alert'
+
+import { CardList, Loading, Alert } from '../components'
+
 
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 import { SaveAlt } from '@material-ui/icons';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-export const SearchFeed = () => {
+export default function SearchFeed() {
 
     const [urlValue, setUrlValue] = useState("")
     const [nameValue, setNameValue] = useState("")
@@ -43,8 +43,7 @@ export const SearchFeed = () => {
 
     const handleSearch = async () => {
         if (urlValue !== "" && nameValue !== "") {
-            
-
+        
             setIsLoading(true)
             try {
                 getParsedResponse(nameValue, urlValue)
@@ -65,7 +64,6 @@ export const SearchFeed = () => {
                 setAlertText(error.toString())
                 setDisplayAlert(true)
             }
-            
         }
     }
 
@@ -100,7 +98,6 @@ export const SearchFeed = () => {
             <Description>
                 Grab the RSS Feed url you would like to search and assign a name to save it to your library.<br/>You can get the url by right clicking on the button <RssFeedIcon /> on the news/blog website.
             </Description>
-            {/* <ActionsContainer> */}
                 <TFContainer>
                     <TextField value={urlValue} onChange={(e) => handleUrlValue(e.target.value)} placeholder="Add url . / feed rss ...  xml maybe" />
                     { urlValue.length > 5 ? 
@@ -108,9 +105,6 @@ export const SearchFeed = () => {
                     }
                     { canSearch ? <SearchButton onClick={() => handleSearch()} >Search</SearchButton> : null   }           
                 </TFContainer>
-                {/* <TrailingButtonContainer>
-                </TrailingButtonContainer> */}
-            {/* </ActionsContainer> */}
             { displayAlert && 
                 <Alert 
                     text={alertText}
@@ -163,11 +157,8 @@ const Description = styled.p`
     width: 90vw;
     color:  ${props => props.theme.tertiary};
     text-align: center;
-    /* display: inline-block; */
-    /* vertical-align: middle; */
 
     svg {
-        /* display: inline-block; */
         vertical-align: center;
         font-size: 1.8rem;
         color:  ${props => props.theme.primary};
@@ -177,12 +168,6 @@ const Description = styled.p`
         font-size: 1.2rem;
     }
 `
-// const ActionsContainer = styled.div`
-//     width: 90vw;
-//     margin: 2rem auto;
-//     display: flex;
-//     justify-content:center;
-// `
 const TFContainer = styled.div`
     width: 90vw;
     margin: 2rem auto;
@@ -196,15 +181,6 @@ const TFContainer = styled.div`
     }
 `
 
-// const TrailingButtonContainer = styled.div`
-//     display: flex;
-// `
-// const TrailingButton = styled.button`
-//     padding: 0 1rem;
-//     background-color: #cab1e2;
-//     color: #2b2b83;
-//     height: 2.2rem;
-// `
 
 const TextField = styled.input`
     display: block;
@@ -236,7 +212,6 @@ const SearchButton = styled.button`
     color: ${props => props.theme.primary};
     border-radius: 1.1rem;
     height: 2.2rem;
-    /* max-width: 200px; */
     box-shadow: -2px 4px 6px ${props => props.theme.secondaryAlt};
 
     @media screen and (max-width: 700px) {

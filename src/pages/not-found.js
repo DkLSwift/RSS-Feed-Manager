@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-export const NotFound = () => {
+export default function NotFound() {
     return (
         <Container>
             <Title>

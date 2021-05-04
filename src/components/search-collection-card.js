@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { NewsCard } from './news-card'
+import { NewsCard } from '../components'
 
 export default function SearchCollectionCard({ news }) {
 

@@ -51,6 +51,7 @@ const SearchFieldContainer = styled.div`
          text-align: center;
          
     }
+
 `
 
 const TextFieldContainer = styled.div`
@@ -74,6 +75,7 @@ const TextField = styled.input`
     :-ms-input-placeholder {
         color: ${props => props.theme.tertiary};
     }
+
 `
 
 const ClearSearchButton = styled.button`

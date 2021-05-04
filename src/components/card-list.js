@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react'
-import styled from 'styled-components'
-import { NewsCard } from './news-card'
+import styled from 'styled-components/macro'
+
+import { NewsCard } from '../components'
 
 
 
-export  const CardList = ({ 
+const CardList = ({ 
         news, 
         displayTrailingButton, 
         trailingButtonText, 
@@ -85,11 +86,16 @@ export  const CardList = ({
     )
 }
 
+export default CardList
+
 const CardListContainer = styled.div`
     width: 94%;
     max-width: 1800px;
     margin: 2rem auto;
 
+    /* @media screen and (max-width: 350px) {
+        width: 90%;
+    } */
     
 `
 const Header = styled.div`
@@ -104,19 +110,27 @@ const Header = styled.div`
     }
 
      
-        @media screen and (max-width: 700px) {
-            ${props => props.displaySecondTrailingButton && `
-                display: flex;
-                flex-direction: column;
-                
-                h2 {
-                    text-align: center;
-                }
-            `};
-        }
-     
-    
+    @media screen and (max-width: 700px) {
+        ${props => props.displaySecondTrailingButton && `
+            display: flex;
+            flex-direction: column;
+            
+            h2 {
+                text-align: center;
+            }
+        `};
+    }
 
+     @media screen and (max-width: 350px) {
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* h2 {
+            text-align: center;
+        } */
+        
+    }
 `
 const ButtonContainer = styled.div`
 
@@ -143,6 +157,10 @@ const Button = styled.button`
         margin-bottom: 44px;
         
     }
+
+    @media screen and (max-width: 350px) {
+        margin-left: 0;
+    }
 `
 
 const CardContainer = styled.div`
@@ -155,7 +173,6 @@ const CardContainer = styled.div`
 
 
     .active {
-        /* background: rgba(255,255,255,0.3); */
         cursor: grabbing;
         cursor: -webkit-grabbing;
         transform: scale(1);
@@ -164,7 +181,3 @@ const CardContainer = styled.div`
         display: none;
     }
 `
-
-// const StyledButton = ({onClick, text, icon}) => (
-//     <Button onClick={onClick}>{text} {icon}</Button>
-// )

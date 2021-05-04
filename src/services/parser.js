@@ -15,14 +15,12 @@ export const getParsedResponse = async (source, baseUrl) => {
         xhttp.send();
 
         xhttp.onreadystatechange = async function() {
-            // console.log("xhttp response : ", this.response);
             if (this.readyState === 4 && this.status === 200) {
                 console.log('xhttp.responseXML: ',xhttp.responseXML);
                
                 if (xhttp.responseXML !== null && xhttp.responseXML !== undefined ) {
                 
                     const result = parseResponse(xhttp.responseXML)
-                        // console.log('Resolve promise with: ', result)
                         if (result.news.length > 0) {
                             resolve(result)
                         } else {
@@ -32,7 +30,6 @@ export const getParsedResponse = async (source, baseUrl) => {
                      
                     if (isHTML(xhttp.response)) {
                         const doc = new DOMParser().parseFromString(xhttp.response, "text/html");
-                        // console.log('doc: ',doc);
                         const result = parseResponse(doc)
 
                         if (result.news.length > 0) {

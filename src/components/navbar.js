@@ -36,8 +36,6 @@ const Navbar = ({ setTheme, themeColors }) => {
         }, [ref])
     }
 
-
-
     const handleChangeOfTheme = (selectedTheme) => {
         
         console.log(selectedTheme);
@@ -55,7 +53,6 @@ const Navbar = ({ setTheme, themeColors }) => {
                 setTheme(darkOrangeColors)
                 break;
         }
-
         setToggleSettings(false)
     }
 
@@ -95,14 +92,6 @@ const Navbar = ({ setTheme, themeColors }) => {
             <MenuButton onClick={() => setShowMenu(true)}>
                 <MenuOpenIcon />
             </MenuButton>
-            {/* { toggleSettings && 
-                <ThemeContainer ref={themeDiv}>
-                    <h3>Choose Theme</h3>
-                    <Button onClick={() => handleChangeOfTheme(themeColors.darkOrangeColors)}>Dark Orange</Button>
-                    <Button onClick={() => handleChangeOfTheme(themeColors.dephtsOfWater)}>Dephts Of Water</Button>
-                    <Button onClick={() => handleChangeOfTheme(themeColors.blueberry)}>Blueberry</Button>
-                </ThemeContainer>
-            } */}
             </NavContainer>
             <Menu showMenu={showMenu} ref={menu}>
                 <MenuHeader>
@@ -152,8 +141,6 @@ const Nav = styled.nav`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* justify-content: space-between;
-    align-items: center; */
     background-color: ${props => props.theme.secondaryAlt2};
     position: fixed;
     top: 0;
@@ -238,7 +225,6 @@ const ThemeContainer = styled.div`
     width: 240px;
     background-color: ${props => props.theme.secondaryAlt2};
     position: absolute; 
-    /* right: 1.8%; */
     top: 82px; 
     -webkit-clip-path: polygon(100% 7%, 91% 7%, 81% 0, 70% 7%, 0 7%, 0 100%, 100% 100%);
     clip-path: polygon(100% 7%, 91% 7%, 81% 0, 70% 7%, 0 7%, 0 100%, 100% 100%);

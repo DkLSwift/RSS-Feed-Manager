@@ -158,7 +158,6 @@ const CardContainer = styled.div`
 
 
     .active {
-        /* background: rgba(255,255,255,0.3); */
         cursor: grabbing;
         cursor: -webkit-grabbing;
         transform: scale(1);
@@ -167,7 +166,3 @@ const CardContainer = styled.div`
         display: none;
     }
 `
-
-// const StyledButton = ({onClick, text, icon}) => (
-//     <Button onClick={onClick}>{text} {icon}</Button>
-// )

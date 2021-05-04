@@ -67,11 +67,6 @@ export const discoverRSS = [
                 source: "Science News Magazine",
                 url: "https://www.sciencenews.org/feed"
             },
-            // {
-            //     title: "Science",
-            //     source: "ScienceDaily",
-            //     url: "https://www.sciencedaily.com/rss/"
-            // },
             {
                 title: "Science",
                 source: "New Scientist Magazine",
@@ -132,11 +127,6 @@ export const discoverRSS = [
     {
         category: "Swoftware Development",
         data: [
-            // {
-            //     title: "Swoftware Development",
-            //     source: "Google Developers Blog",
-            //     url: "http://feeds.feedburner.com/GDBcode"
-            // },
             {
                 title: "Swoftware Development",
                 source: "ProgrammableWeb",
@@ -263,11 +253,6 @@ export const discoverRSS = [
                 source: "Mamouth",
                 url: "http://feeds.feedburner.com/ZoneMilitaire"
             },
-            // {
-            //     title: "Military",
-            //     source: "Defence Blog",
-            //     url: "https://www.feedspot.com/infiniterss.php?_src=feed_title&followfeedid=4624447&q=site:http%3A%2F%2Fdefence-blog.com%2Ffeed"
-            // },
             {
                 title: "Military",
                 source: "GOV.UK Ministry of Defence",

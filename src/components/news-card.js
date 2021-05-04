@@ -3,14 +3,12 @@ import styled from 'styled-components'
 
 const NewsCard = ({ item }) => {
 
-
     const canDisplayImage = (imgUrl) => {
         if ( imgUrl === undefined || imgUrl === null || imgUrl === '') {
             return false
         } else {
             return true
         }
-        
     }
 
     return (
@@ -26,7 +24,6 @@ const NewsCard = ({ item }) => {
             }
             
             <Link href={item.link} target="_blank">
-                {/* <img src={arrowRight} alt="arrow-right"/> */}
                 Read more
             </Link>
         </Card>
@@ -39,22 +36,13 @@ const Card = styled.div`
     background-color:  ${props => props.theme.secondaryAlt};
     border-radius: 24px;
     margin: 0.8rem 0.5rem;
-    /* min-width: 280px; */
     min-width: 320px;
     max-width: 320px;
-    /* min-height: 325px; */
     min-height: 450px;
     max-height: 450px;
     
-    /* flex: 0 0 auto; */
     overflow: hidden;
     position: relative;
-
-    /* position: relative;
-    width: 100%;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap; */
     
     cursor: grab;
     box-shadow: -4px 5px 10px ${props => props.theme.secondaryAlt};
@@ -70,7 +58,6 @@ const Card = styled.div`
 const Title = styled.h3`
     color:  ${props => props.theme.primary};
     text-align: center;
-    /* margin: 0.5rem; */
 
     padding: 0.3rem 0.3rem;
     overflow: hidden;
@@ -120,29 +107,6 @@ const Description = styled.p`
     text-align: center;
     user-select: none;
 `
-// const Link = styled.a`
-//     z-index: 9;
-//     text-decoration: none;
-//     user-select: all;
-//     border-radius: 50%;
-//     background-color: rgb(71,8,129, 0.5);
-    
-//     position: absolute;
-//     right: 10px;
-//     bottom: 10px;
-//     text-align: center;
-//     cursor: pointer;
-//     display: block;
-//     box-shadow: 0 2px 4px 0 rgba(255, 255, 255, 0.2), 0 3px 10px 0 rgba(255, 255, 255, 0.19);
-//     img {
-//         color: #CE99FF;
-//         margin: 0.5rem;
-//         z-index: 7;
-//         height: 24px;
-//         width: 24px;
-//         user-select: none;
-//     }
-// `
 const Link = styled.a`
     z-index: 9;
     text-decoration: none;

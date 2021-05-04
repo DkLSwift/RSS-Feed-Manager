@@ -27,14 +27,13 @@ export default function Home() {
 
     const getNewsfromUrls = async (feeds) => {
         const resolvedPromisesArray = feeds.map(feed => getParsedResponse(feed.source, feed.url).catch(err => console.log('Promise err: ', err)))
-        // console.log("resolved promises array: ", resolvedPromisesArray);
 
         await Promise.all(resolvedPromisesArray)
             .then(value => setAllNews(value))
             .catch(err => console.log('Promise ALL err: ', err))
     }
 
-    const handleDelete = (source, url) => {
+    const handleDelete = (source) => {
         const feedStr = 'rss-feed-manager'
         const allFeeds = JSON.parse(localStorage.getItem(feedStr))
         const newFeeds = allFeeds.filter(feed => feed.source !== source)
@@ -55,7 +54,6 @@ export default function Home() {
             if ( news.length > 0 ) {
                 setSearchedNews(news)
             }
-            
         } else {
             setSearchedSources([])
             setSearchedNews([])
@@ -127,11 +125,6 @@ const Page = styled.div`
 `
 
 const Title = styled.h1`
-    /* color:  ${props => props.theme.primary};
-    font-size: 3rem;
-    padding: 1rem;
-    margin: 8rem 2rem 2rem; */
-    
     font-size: 2.8rem;
     margin: 10rem auto 4rem; 
     width: 90vw;

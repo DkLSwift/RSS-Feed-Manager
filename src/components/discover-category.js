@@ -12,7 +12,6 @@ export default function DiscoverCategory({ category, currentFeeds, setCurrentFee
 
     const [previewData, setPreviewData] = useState(null)
     const [alertText, setAlertText] = useState(null)
-    // const [isLoading, setIsLoading] = useState(false)
     const [displayAlert, setDisplayAlert] = useState(false)
     const [displaySourceAlert, setDisplaySourceAlert] = useState(false)
     const [alertSourceName, setalertSourceName] = useState()

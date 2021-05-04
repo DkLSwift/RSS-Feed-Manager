@@ -1,5 +1,4 @@
 export { default as Navbar } from './navbar'
-export { default as Footer } from './footer'
 
 export { default as CardList } from './card-list'
 export { default as Alert } from './alert'
@@ -10,3 +9,4 @@ export { default as NewsCard } from './news-card'
 export { default as DiscoverCategory } from './discover-category'
 
 export { default as ToTopButton } from './to-top-button'
+export { default as Footer } from './footer'
